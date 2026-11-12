@@ -135,23 +135,7 @@ body {
 }
 
 .inline-edit-icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border: none;
-  background: transparent;
-  color: #9ca3af;
-  border-radius: 4px;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: color 0.15s ease, background-color 0.15s ease;
-}
-
-.inline-edit-icon-btn:hover {
-  color: #1b5ee3;
-  background-color: #eff6ff;
+  display: none !important;
 }
 
 .inline-meta-editor {
@@ -275,27 +259,7 @@ body {
 
 /* Subtle Edit Button on Existing Message */
 .edit-msg-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  font-size: 11.5px;
-  font-weight: 500;
-  color: #6b7280;
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
-}
-
-.edit-msg-btn:hover {
-  color: #1b5ee3;
-  background-color: #eff6ff;
-  border-color: #bfdbfe;
+  display: none !important;
 }
 
 /* Message Body Typography & Formatting */
@@ -681,7 +645,7 @@ body {
             <button
               type="button"
               id="editTicketMetaBtn"
-              class="inline-edit-icon-btn"
+              class="inline-edit-icon-btn hidden"
               aria-label="Edit Ticket ID and date"
               title="Edit Ticket ID and date"
             >
@@ -723,7 +687,7 @@ body {
             <button
               type="button"
               id="editChatDateBtn"
-              class="inline-edit-icon-btn"
+              class="inline-edit-icon-btn hidden"
               aria-label="Edit conversation date"
               title="Edit date"
             >
@@ -752,7 +716,7 @@ body {
             <button
               type="button"
               id="editMessageBtn"
-              class="edit-msg-btn"
+              class="edit-msg-btn hidden"
               aria-label="Edit message"
               title="Edit message"
             >

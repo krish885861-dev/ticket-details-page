@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile &amp; Account related issue - Ticket ID: 500014181477</title>
+  <style>
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f2f5fa;
+  color: #1f2937;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* App Shell Layout */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  background-color: #f2f5fa;
+  overflow: hidden;
+}
+
+/* Safety Demonstration Footer Note */
+.demo-footer-note {
+  color: #64748b;
+  font-size: 10.5px;
+  line-height: 1.3;
+  text-align: center;
+  padding: 0 14px 6px 14px;
+}
+
+/* Top Header */
+.chat-header {
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaecef;
+  width: 100%;
+  z-index: 10;
+}
+
+.chat-header-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: -4px;
+  border: none;
+  background: transparent;
+  color: #111827;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.back-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.back-btn:active {
+  background-color: #e5e7eb;
+}
+
+.header-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.header-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.header-subtitle {
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #6b7280;
+}
+
+.inline-edit-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.inline-edit-icon-btn:hover {
+  color: #1b5ee3;
+  background-color: #eff6ff;
+}
+
+.inline-meta-editor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.inline-meta-input {
+  height: 28px;
+  padding: 2px 8px;
+  font-family: inherit;
+  font-size: 12.5px;
+  color: #1f2937;
+  background-color: #f9fafb;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+}
+
+.inline-meta-input:focus {
+  border-color: #1b5ee3;
+  background-color: #ffffff;
+}
+
+.inline-meta-input--id {
+  width: 140px;
+}
+
+.inline-meta-input--date {
+  width: 105px;
+}
+
+.btn-xs {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+/* Scrollable Chat Area */
+.chat-stream {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: #f2f5fa;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-stream::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chat-stream::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-stream::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.45);
+  border-radius: 999px;
+}
+
+.chat-stream-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 16px 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Date Separator */
+.date-separator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0 14px 0;
+}
+
+.date-separator-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.date-separator-display span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #7b8494;
+  letter-spacing: 0.01em;
+}
+
+/* Message Rows */
+.message-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.message-row--incoming {
+  justify-content: flex-start;
+}
+
+.message-row--outgoing {
+  justify-content: flex-end;
+}
+
+/* Original Support Message Card */
+.message-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #eaeff5;
+  border-radius: 12px;
+  padding: 18px 16px 18px 16px;
+  width: 100%;
+  max-width: calc(100% - 44px);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+/* Subtle Edit Button on Existing Message */
+.edit-msg-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #6b7280;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.edit-msg-btn:hover {
+  color: #1b5ee3;
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+/* Message Body Typography & Formatting */
+.message-body {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #1f2937;
+  font-weight: 400;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.message-body > :first-child {
+  padding-right: 56px;
+}
+
+.message-body p {
+  margin-bottom: 16px;
+}
+
+.message-body p:last-child {
+  margin-bottom: 0;
+}
+
+.message-body .bullet-item {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 16px;
+}
+
+.message-body .bullet-item::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.message-body .tx-line {
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.message-body .tx-line:last-child {
+  margin-bottom: 0;
+}
+
+/* Inline Editor */
+.message-editor {
+  margin-top: 4px;
+}
+
+.edit-textarea {
+  width: 100%;
+  min-height: 280px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1f2937;
+  background-color: #f9fafb;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.edit-textarea:focus {
+  border-color: #1b5ee3;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(27, 94, 227, 0.12);
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: #1b5ee3;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #154ec0;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.btn-secondary:hover {
+  background-color: #f3f4f6;
+}
+
+/* Outgoing Reply Bubbles */
+.replies-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-bubble {
+  background-color: #1b5ee3;
+  color: #ffffff;
+  border-radius: 14px 14px 4px 14px;
+  padding: 10px 14px;
+  max-width: 78%;
+  font-size: 14.5px;
+  line-height: 1.45;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  box-shadow: 0 1px 2px rgba(27, 94, 227, 0.18);
+}
+
+.reply-text {
+  white-space: pre-wrap;
+}
+
+.reply-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.reply-attachment-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.18);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.reply-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Bottom Message Composer */
+.composer-bar {
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border-top: 1px solid #eaecef;
+  width: 100%;
+  z-index: 10;
+}
+
+.composer-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 10px 14px;
+}
+
+.attachment-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.attachment-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  max-width: 240px;
+}
+
+.attachment-chip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-chip button {
+  border: none;
+  background: transparent;
+  color: #1e40af;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.composer-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.composer-input-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 24px;
+  padding: 6px 12px 6px 16px;
+  min-height: 44px;
+  transition: border-color 0.15s ease;
+}
+
+.composer-input-pill:focus-within {
+  border-color: #1b5ee3;
+}
+
+.composer-textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: #1f2937;
+  resize: none;
+  max-height: 110px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.composer-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.composer-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: #4b5563;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.composer-icon-btn:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.composer-mic-btn,
+.composer-send-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: #1b5ee3;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.composer-mic-btn:hover,
+.composer-send-btn:hover {
+  background-color: #154ec0;
+}
+
+.composer-mic-btn:active,
+.composer-send-btn:active {
+  transform: scale(0.96);
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 76px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background-color: #1e293b;
+  color: #ffffff;
+  font-size: 12.5px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 50;
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .chat-header-inner {
+    padding: 14px 24px;
+  }
+
+  .chat-stream-inner {
+    padding: 0 24px 28px 24px;
+  }
+
+  .message-card {
+    max-width: 580px;
+    padding: 20px 20px;
+  }
+
+  .composer-inner {
+    padding: 12px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 14.5px;
+  }
+
+  .message-card {
+    max-width: calc(100% - 32px);
+    padding: 16px 14px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Navigation Header -->
+    <header class="chat-header">
+      <div class="chat-header-inner">
+        <button
+          type="button"
+          id="backBtn"
+          class="back-btn"
+          aria-label="Go back"
+          title="Back"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+
+        <div class="header-text">
+          <h1 class="header-title">Profile &amp; Account related issue</h1>
+          <div id="ticketMetaDisplay" class="header-subtitle-row">
+            <p class="header-subtitle" id="ticketSubtitle">Ticket ID: 500014181477, 14 Oct</p>
+            <button
+              type="button"
+              id="editTicketMetaBtn"
+              class="inline-edit-icon-btn"
+              aria-label="Edit Ticket ID and date"
+              title="Edit Ticket ID and date"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+          </div>
+          <div id="ticketMetaEditor" class="inline-meta-editor hidden">
+            <label for="editTicketIdInput" class="sr-only">Ticket ID</label>
+            <input
+              type="text"
+              id="editTicketIdInput"
+              class="inline-meta-input inline-meta-input--id"
+              placeholder="Ticket ID"
+            />
+            <label for="editTicketDateInput" class="sr-only">Ticket Date</label>
+            <input
+              type="text"
+              id="editTicketDateInput"
+              class="inline-meta-input inline-meta-input--date"
+              placeholder="Date (e.g. 14 Oct)"
+            />
+            <button type="button" id="saveTicketMetaBtn" class="btn-primary btn-xs">Save</button>
+            <button type="button" id="cancelTicketMetaBtn" class="btn-secondary btn-xs">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Scrollable Conversation Area -->
+    <main id="chatStream" class="chat-stream" aria-label="Support conversation">
+      <div class="chat-stream-inner" id="chatMessagesContainer">
+        <!-- Date Separator -->
+        <div class="date-separator">
+          <div id="chatDateDisplay" class="date-separator-display">
+            <span id="chatDateText">Wed, 14/10</span>
+            <button
+              type="button"
+              id="editChatDateBtn"
+              class="inline-edit-icon-btn"
+              aria-label="Edit conversation date"
+              title="Edit date"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+          </div>
+          <div id="chatDateEditor" class="inline-meta-editor hidden">
+            <label for="editChatDateInput" class="sr-only">Conversation Date</label>
+            <input
+              type="text"
+              id="editChatDateInput"
+              class="inline-meta-input inline-meta-input--date"
+              placeholder="e.g. Wed, 14/10"
+            />
+            <button type="button" id="saveChatDateBtn" class="btn-primary btn-xs">Save</button>
+            <button type="button" id="cancelChatDateBtn" class="btn-secondary btn-xs">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Original Support Message Card (Editable) -->
+        <article class="message-row message-row--incoming" id="originalMessageRow">
+          <div class="message-card" id="originalMessageCard">
+            <button
+              type="button"
+              id="editMessageBtn"
+              class="edit-msg-btn"
+              aria-label="Edit message"
+              title="Edit message"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              <span>Edit</span>
+            </button>
+
+            <!-- Rendered Message Content -->
+            <div id="originalMessageBody" class="message-body"></div>
+
+            <!-- Inline Edit Mode -->
+            <div id="originalMessageEditor" class="message-editor hidden">
+              <label for="editMessageTextarea" class="sr-only">Edit support message</label>
+              <textarea
+                id="editMessageTextarea"
+                class="edit-textarea"
+                rows="14"
+                spellcheck="true"
+              ></textarea>
+              <div class="edit-actions">
+                <button type="button" id="cancelEditBtn" class="btn-secondary">Cancel</button>
+                <button type="button" id="saveEditBtn" class="btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Dynamic User Replies Render Here -->
+        <div id="repliesContainer" class="replies-container"></div>
+      </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Bottom Message Composer -->
+    <footer class="composer-bar">
+      <div class="composer-inner">
+        <!-- Pending Attachment Preview -->
+        <div id="attachmentPreview" class="attachment-preview hidden"></div>
+
+        <form id="composerForm" class="composer-row" autocomplete="off">
+          <div class="composer-input-pill">
+            <label for="messageInput" class="sr-only">Send Message</label>
+            <textarea
+              id="messageInput"
+              class="composer-textarea"
+              placeholder="Send Message"
+              rows="1"
+            ></textarea>
+
+            <input
+              type="file"
+              id="fileInput"
+              class="sr-only"
+              accept="image/*,.pdf,.doc,.docx,.txt"
+              multiple
+            />
+            <input
+              type="file"
+              id="cameraInput"
+              class="sr-only"
+              accept="image/*"
+              capture="environment"
+            />
+
+            <button
+              type="button"
+              id="attachBtn"
+              class="composer-icon-btn"
+              aria-label="Attach file"
+              title="Attach file"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              id="cameraBtn"
+              class="composer-icon-btn"
+              aria-label="Take or upload photo"
+              title="Camera"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </button>
+          </div>
+
+          <button
+            type="button"
+            id="micBtn"
+            class="composer-mic-btn"
+            aria-label="Voice message"
+            title="Voice message"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </button>
+
+          <button
+            type="submit"
+            id="sendBtn"
+            class="composer-send-btn hidden"
+            aria-label="Send message"
+            title="Send message"
+          >
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+      <!-- Safety / Demonstration Notice -->
+      <div class="demo-footer-note" role="note" aria-label="Demonstration notice">
+        Demonstration &amp; UI Recreation for incident documentation — not an authentic Paytm, Razorpay, or payment-provider page.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+(function () {
+  "use strict";
+
+  const STORAGE_KEYS = {
+    ORIGINAL_MESSAGE: "ticket_500014181477_original_message",
+    REPLIES: "ticket_500014181477_replies",
+    TICKET_ID: "ticket_500014181477_ticket_id",
+    TICKET_DATE: "ticket_500014181477_ticket_date",
+    CHAT_DATE: "ticket_500014181477_chat_date"
+  };
+
+  const DEFAULT_TICKET_ID = "500014181477";
+  const DEFAULT_TICKET_DATE = "14 Oct";
+  const DEFAULT_CHAT_DATE = "Wed, 14/10";
+
+  const DEFAULT_ORIGINAL_MESSAGE = [
+    "Dear Merchant,",
+    "",
+    "Greetings from Paytm Payments",
+    "",
+    "The payment acceptance limit of your Paytm payments merchant account has been reduced because we have noticed some transactions that are not in line with your business activities.",
+    "",
+    "To restore your payment limits and avoid any further issues like settlement delay or account block, please upload the required documents quickly.",
+    "",
+    "Documents Required:",
+    "",
+    "a. Shop photos (Interior & Exterior) with a clearly visible signboard",
+    "",
+    "b. Invoices for the transactions listed below:",
+    "",
+    "• Proprietorship / Non-Proprietorship merchants: Please share the relevant invoices",
+    "",
+    "• Individual entity merchants: Please share a clarification letter on plain white paper",
+    "",
+    "Transaction Details: (transaction IDs, order IDs, dates, amounts)",
+    "",
+    "20261003110870000312947456896180048 - T2610030104235999537213 - 2026-10-03 - 40000",
+    "",
+    "20261012110840000316523490232450032 - PTM20a20d5c4fc54cefab2a6237b2b994dc - 2026-10-12 - 17000"
+  ].join("\n");
+
+  // DOM Elements
+  const backBtn = document.getElementById("backBtn");
+  const ticketMetaDisplay = document.getElementById("ticketMetaDisplay");
+  const ticketSubtitle = document.getElementById("ticketSubtitle");
+  const editTicketMetaBtn = document.getElementById("editTicketMetaBtn");
+  const ticketMetaEditor = document.getElementById("ticketMetaEditor");
+  const editTicketIdInput = document.getElementById("editTicketIdInput");
+  const editTicketDateInput = document.getElementById("editTicketDateInput");
+  const saveTicketMetaBtn = document.getElementById("saveTicketMetaBtn");
+  const cancelTicketMetaBtn = document.getElementById("cancelTicketMetaBtn");
+  const chatDateDisplay = document.getElementById("chatDateDisplay");
+  const chatDateText = document.getElementById("chatDateText");
+  const editChatDateBtn = document.getElementById("editChatDateBtn");
+  const chatDateEditor = document.getElementById("chatDateEditor");
+  const editChatDateInput = document.getElementById("editChatDateInput");
+  const saveChatDateBtn = document.getElementById("saveChatDateBtn");
+  const cancelChatDateBtn = document.getElementById("cancelChatDateBtn");
+  const chatStream = document.getElementById("chatStream");
+  const originalMessageBody = document.getElementById("originalMessageBody");
+  const editMessageBtn = document.getElementById("editMessageBtn");
+  const originalMessageEditor = document.getElementById("originalMessageEditor");
+  const editMessageTextarea = document.getElementById("editMessageTextarea");
+  const saveEditBtn = document.getElementById("saveEditBtn");
+  const cancelEditBtn = document.getElementById("cancelEditBtn");
+  const repliesContainer = document.getElementById("repliesContainer");
+  const composerForm = document.getElementById("composerForm");
+  const messageInput = document.getElementById("messageInput");
+  const attachBtn = document.getElementById("attachBtn");
+  const cameraBtn = document.getElementById("cameraBtn");
+  const fileInput = document.getElementById("fileInput");
+  const cameraInput = document.getElementById("cameraInput");
+  const attachmentPreview = document.getElementById("attachmentPreview");
+  const micBtn = document.getElementById("micBtn");
+  const sendBtn = document.getElementById("sendBtn");
+  const toastEl = document.getElementById("toast");
+
+  // State
+  let currentTicketId = loadFromStorage(STORAGE_KEYS.TICKET_ID, DEFAULT_TICKET_ID);
+  let currentTicketDate = loadFromStorage(STORAGE_KEYS.TICKET_DATE, DEFAULT_TICKET_DATE);
+  let currentChatDate = loadFromStorage(STORAGE_KEYS.CHAT_DATE, DEFAULT_CHAT_DATE);
+  let currentOriginalMessage = loadFromStorage(
+    STORAGE_KEYS.ORIGINAL_MESSAGE,
+    DEFAULT_ORIGINAL_MESSAGE
+  );
+  let replies = loadRepliesFromStorage();
+  let pendingAttachments = [];
+  let toastTimer = null;
+
+  // Storage Helpers
+  function loadFromStorage(key, fallback) {
+    try {
+      const value = window.localStorage.getItem(key);
+      return value !== null ? value : fallback;
+    } catch (err) {
+      return fallback;
+    }
+  }
+
+  function saveToStorage(key, value) {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch (err) {
+      // Ignore storage errors in restricted environments
+    }
+  }
+
+  function loadRepliesFromStorage() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEYS.REPLIES);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function saveRepliesToStorage() {
+    saveToStorage(STORAGE_KEYS.REPLIES, JSON.stringify(replies));
+  }
+
+  // Toast Helper
+  function showToast(message) {
+    if (!toastEl) return;
+    toastEl.textContent = message;
+    toastEl.classList.add("show");
+    if (toastTimer) {
+      clearTimeout(toastTimer);
+    }
+    toastTimer = setTimeout(function () {
+      toastEl.classList.remove("show");
+    }, 2400);
+  }
+
+  // Safe HTML Escaping
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // Render Original Message Preserving Formatting
+  function renderOriginalMessage(text) {
+    const blocks = text.split(/\n\s*\n/);
+    const htmlParts = blocks.map(function (block) {
+      const trimmed = block.trim();
+      if (!trimmed) return "";
+
+      if (trimmed.startsWith("•")) {
+        const cleanBulletText = trimmed.replace(/^•\s*/, "");
+        return '<div class="bullet-item">' + escapeHtml(cleanBulletText).replace(/\n/g, "<br>") + "</div>";
+      }
+
+      if (/^\d{20,}\s*-\s*/.test(trimmed)) {
+        return '<p class="tx-line">' + escapeHtml(trimmed).replace(/\n/g, "<br>") + "</p>";
+      }
+
+      return "<p>" + escapeHtml(trimmed).replace(/\n/g, "<br>") + "</p>";
+    });
+
+    originalMessageBody.innerHTML = htmlParts.join("");
+  }
+
+  // Render Replies
+  function renderReplies() {
+    repliesContainer.innerHTML = "";
+    replies.forEach(function (reply) {
+      const row = document.createElement("div");
+      row.className = "message-row message-row--outgoing";
+
+      const bubble = document.createElement("div");
+      bubble.className = "reply-bubble";
+
+      if (reply.text) {
+        const textEl = document.createElement("div");
+        textEl.className = "reply-text";
+        textEl.textContent = reply.text;
+        bubble.appendChild(textEl);
+      }
+
+      if (Array.isArray(reply.attachments) && reply.attachments.length > 0) {
+        const attWrap = document.createElement("div");
+        attWrap.className = "reply-attachments";
+        reply.attachments.forEach(function (att) {
+          const tag = document.createElement("span");
+          tag.className = "reply-attachment-tag";
+          tag.textContent = "📎 " + att.name;
+          attWrap.appendChild(tag);
+        });
+        bubble.appendChild(attWrap);
+      }
+
+      const meta = document.createElement("div");
+      meta.className = "reply-meta";
+      meta.textContent = reply.timestamp || "";
+      bubble.appendChild(meta);
+
+      row.appendChild(bubble);
+      repliesContainer.appendChild(row);
+    });
+  }
+
+  // Scroll Helpers
+  function scrollToBottom(smooth) {
+    chatStream.scrollTo({
+      top: chatStream.scrollHeight,
+      behavior: smooth ? "smooth" : "auto"
+    });
+  }
+
+  // Render Ticket Meta & Chat Date
+  function renderTicketMeta() {
+    ticketSubtitle.textContent = "Ticket ID: " + currentTicketId + ", " + currentTicketDate;
+    document.title = "Profile & Account related issue - Ticket ID: " + currentTicketId;
+  }
+
+  function renderChatDate() {
+    chatDateText.textContent = currentChatDate;
+  }
+
+  function enterTicketMetaEditMode() {
+    editTicketIdInput.value = currentTicketId;
+    editTicketDateInput.value = currentTicketDate;
+    ticketMetaDisplay.classList.add("hidden");
+    ticketMetaEditor.classList.remove("hidden");
+    editTicketIdInput.focus();
+  }
+
+  function exitTicketMetaEditMode() {
+    ticketMetaEditor.classList.add("hidden");
+    ticketMetaDisplay.classList.remove("hidden");
+  }
+
+  function saveTicketMeta() {
+    const nextId = editTicketIdInput.value.trim();
+    const nextDate = editTicketDateInput.value.trim();
+    if (!nextId || !nextDate) {
+      showToast("Ticket ID and date cannot be empty");
+      return;
+    }
+    currentTicketId = nextId;
+    currentTicketDate = nextDate;
+    saveToStorage(STORAGE_KEYS.TICKET_ID, currentTicketId);
+    saveToStorage(STORAGE_KEYS.TICKET_DATE, currentTicketDate);
+    renderTicketMeta();
+    exitTicketMetaEditMode();
+    showToast("Ticket details updated");
+  }
+
+  function enterChatDateEditMode() {
+    editChatDateInput.value = currentChatDate;
+    chatDateDisplay.classList.add("hidden");
+    chatDateEditor.classList.remove("hidden");
+    editChatDateInput.focus();
+  }
+
+  function exitChatDateEditMode() {
+    chatDateEditor.classList.add("hidden");
+    chatDateDisplay.classList.remove("hidden");
+  }
+
+  function saveChatDate() {
+    const nextChatDate = editChatDateInput.value.trim();
+    if (!nextChatDate) {
+      showToast("Date cannot be empty");
+      return;
+    }
+    currentChatDate = nextChatDate;
+    saveToStorage(STORAGE_KEYS.CHAT_DATE, currentChatDate);
+    renderChatDate();
+    exitChatDateEditMode();
+    showToast("Date updated");
+  }
+
+  // Edit Existing Message Flow
+  function enterEditMode() {
+    editMessageTextarea.value = currentOriginalMessage;
+    originalMessageBody.classList.add("hidden");
+    editMessageBtn.classList.add("hidden");
+    originalMessageEditor.classList.remove("hidden");
+    editMessageTextarea.focus();
+  }
+
+  function exitEditMode() {
+    originalMessageEditor.classList.add("hidden");
+    originalMessageBody.classList.remove("hidden");
+    editMessageBtn.classList.remove("hidden");
+  }
+
+  function saveEditedMessage() {
+    const updated = editMessageTextarea.value.trim();
+    if (!updated) {
+      showToast("Message cannot be empty");
+      editMessageTextarea.focus();
+      return;
+    }
+    currentOriginalMessage = updated;
+    saveToStorage(STORAGE_KEYS.ORIGINAL_MESSAGE, currentOriginalMessage);
+    renderOriginalMessage(currentOriginalMessage);
+    exitEditMode();
+    showToast("Message saved");
+  }
+
+  function cancelEditedMessage() {
+    editMessageTextarea.value = currentOriginalMessage;
+    exitEditMode();
+  }
+
+  // Composer Helpers
+  function updateComposerButtons() {
+    const hasText = messageInput.value.trim().length > 0;
+    const hasAttachments = pendingAttachments.length > 0;
+    if (hasText || hasAttachments) {
+      micBtn.classList.add("hidden");
+      sendBtn.classList.remove("hidden");
+    } else {
+      sendBtn.classList.add("hidden");
+      micBtn.classList.remove("hidden");
+    }
+  }
+
+  function autoResizeTextarea() {
+    messageInput.style.height = "auto";
+    messageInput.style.height = Math.min(messageInput.scrollHeight, 110) + "px";
+  }
+
+  function renderAttachmentPreview() {
+    attachmentPreview.innerHTML = "";
+    if (pendingAttachments.length === 0) {
+      attachmentPreview.classList.add("hidden");
+      updateComposerButtons();
+      return;
+    }
+
+    attachmentPreview.classList.remove("hidden");
+    pendingAttachments.forEach(function (att, index) {
+      const chip = document.createElement("div");
+      chip.className = "attachment-chip";
+
+      const label = document.createElement("span");
+      label.textContent = att.name;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.setAttribute("aria-label", "Remove " + att.name);
+      removeBtn.textContent = "×";
+      removeBtn.addEventListener("click", function () {
+        pendingAttachments.splice(index, 1);
+        renderAttachmentPreview();
+      });
+
+      chip.appendChild(label);
+      chip.appendChild(removeBtn);
+      attachmentPreview.appendChild(chip);
+    });
+
+    updateComposerButtons();
+  }
+
+  function handleFilesSelected(fileList) {
+    if (!fileList || fileList.length === 0) return;
+    Array.from(fileList).forEach(function (file) {
+      pendingAttachments.push({
+        name: file.name,
+        size: file.size
+      });
+    });
+    renderAttachmentPreview();
+  }
+
+  function formatCurrentTime() {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function sendReply(event) {
+    if (event) event.preventDefault();
+    const text = messageInput.value.trim();
+    if (!text && pendingAttachments.length === 0) {
+      return;
+    }
+
+    const newReply = {
+      id: Date.now(),
+      text: text,
+      attachments: pendingAttachments.slice(),
+      timestamp: formatCurrentTime()
+    };
+
+    replies.push(newReply);
+    saveRepliesToStorage();
+    renderReplies();
+
+    // Clear input and attachments
+    messageInput.value = "";
+    messageInput.style.height = "auto";
+    pendingAttachments = [];
+    fileInput.value = "";
+    cameraInput.value = "";
+    renderAttachmentPreview();
+    updateComposerButtons();
+
+    scrollToBottom(true);
+  }
+
+  // Event Listeners
+  backBtn.addEventListener("click", function () {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      showToast("Back navigation (demonstration page)");
+    }
+  });
+
+  editTicketMetaBtn.addEventListener("click", enterTicketMetaEditMode);
+  saveTicketMetaBtn.addEventListener("click", saveTicketMeta);
+  cancelTicketMetaBtn.addEventListener("click", exitTicketMetaEditMode);
+  editTicketIdInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      saveTicketMeta();
+    } else if (event.key === "Escape") {
+      exitTicketMetaEditMode();
+    }
+  });
+  editTicketDateInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      saveTicketMeta();
+    } else if (event.key === "Escape") {
+      exitTicketMetaEditMode();
+    }
+  });
+
+  editChatDateBtn.addEventListener("click", enterChatDateEditMode);
+  saveChatDateBtn.addEventListener("click", saveChatDate);
+  cancelChatDateBtn.addEventListener("click", exitChatDateEditMode);
+  editChatDateInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      saveChatDate();
+    } else if (event.key === "Escape") {
+      exitChatDateEditMode();
+    }
+  });
+
+  editMessageBtn.addEventListener("click", enterEditMode);
+  saveEditBtn.addEventListener("click", saveEditedMessage);
+  cancelEditBtn.addEventListener("click", cancelEditedMessage);
+
+  messageInput.addEventListener("input", function () {
+    autoResizeTextarea();
+    updateComposerButtons();
+  });
+
+  messageInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      sendReply();
+    }
+  });
+
+  composerForm.addEventListener("submit", sendReply);
+
+  attachBtn.addEventListener("click", function () {
+    fileInput.click();
+  });
+
+  cameraBtn.addEventListener("click", function () {
+    cameraInput.click();
+  });
+
+  fileInput.addEventListener("change", function (event) {
+    handleFilesSelected(event.target.files);
+  });
+
+  cameraInput.addEventListener("change", function (event) {
+    handleFilesSelected(event.target.files);
+  });
+
+  micBtn.addEventListener("click", function () {
+    showToast("Voice recording is disabled in this demonstration");
+  });
+
+  // Initial Render
+  renderTicketMeta();
+  renderChatDate();
+  renderOriginalMessage(currentOriginalMessage);
+  renderReplies();
+  updateComposerButtons();
+})();
+
+
+  </script>
+</body>
+</html>
+

@@ -86,17 +86,13 @@
               <span>Edit</span>
             </button>
 
-            <!-- Rendered Message Content -->
+            <!-- Rendered Message Content (double-click to edit inline) -->
             <div id="originalMessageBody" class="message-body"></div>
 
-            <!-- Inline Edit Mode -->
-            <div id="originalMessageEditor" class="message-editor hidden">
-              <label for="editMessageTextarea" class="sr-only">Edit support message</label>
-              <textarea id="editMessageTextarea" class="edit-textarea" rows="14" spellcheck="true"></textarea>
-              <div class="edit-actions">
-                <button type="button" id="cancelEditBtn" class="btn-secondary">Cancel</button>
-                <button type="button" id="saveEditBtn" class="btn-primary">Save</button>
-              </div>
+            <!-- Inline Edit Actions (visible only while editing) -->
+            <div id="inlineEditActions" class="edit-actions hidden">
+              <button type="button" id="cancelEditBtn" class="btn-secondary">Cancel</button>
+              <button type="button" id="saveEditBtn" class="btn-primary">Save</button>
             </div>
           </div>
         </article>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -129,7 +130,7 @@ body {
 
 .header-subtitle {
   font-size: 12.5px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.35;
   color: #6b7280;
 }
@@ -270,6 +271,11 @@ body {
   font-weight: 400;
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+
+.message-body[contenteditable="true"] {
+  outline: none;
+  cursor: text;
 }
 
 .message-body > :first-child {
@@ -620,19 +626,15 @@ body {
 
   </style>
 </head>
+
 <body>
   <div class="app-shell">
     <!-- Top Navigation Header -->
     <header class="chat-header">
       <div class="chat-header-inner">
-        <button
-          type="button"
-          id="backBtn"
-          class="back-btn"
-          aria-label="Go back"
-          title="Back"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <button type="button" id="backBtn" class="back-btn" aria-label="Go back" title="Back">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
@@ -642,14 +644,10 @@ body {
           <h1 class="header-title">Profile &amp; Account related issue</h1>
           <div id="ticketMetaDisplay" class="header-subtitle-row">
             <p class="header-subtitle" id="ticketSubtitle">Ticket ID: 500014181477, 14 Oct</p>
-            <button
-              type="button"
-              id="editTicketMetaBtn"
-              class="inline-edit-icon-btn hidden"
-              aria-label="Edit Ticket ID and date"
-              title="Edit Ticket ID and date"
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <button type="button" id="editTicketMetaBtn" class="inline-edit-icon-btn hidden"
+              aria-label="Edit Ticket ID and date" title="Edit Ticket ID and date">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
               </svg>
@@ -657,19 +655,11 @@ body {
           </div>
           <div id="ticketMetaEditor" class="inline-meta-editor hidden">
             <label for="editTicketIdInput" class="sr-only">Ticket ID</label>
-            <input
-              type="text"
-              id="editTicketIdInput"
-              class="inline-meta-input inline-meta-input--id"
-              placeholder="Ticket ID"
-            />
+            <input type="text" id="editTicketIdInput" class="inline-meta-input inline-meta-input--id"
+              placeholder="Ticket ID" />
             <label for="editTicketDateInput" class="sr-only">Ticket Date</label>
-            <input
-              type="text"
-              id="editTicketDateInput"
-              class="inline-meta-input inline-meta-input--date"
-              placeholder="Date (e.g. 14 Oct)"
-            />
+            <input type="text" id="editTicketDateInput" class="inline-meta-input inline-meta-input--date"
+              placeholder="Date (e.g. 14 Oct)" />
             <button type="button" id="saveTicketMetaBtn" class="btn-primary btn-xs">Save</button>
             <button type="button" id="cancelTicketMetaBtn" class="btn-secondary btn-xs">Cancel</button>
           </div>
@@ -684,14 +674,10 @@ body {
         <div class="date-separator">
           <div id="chatDateDisplay" class="date-separator-display">
             <span id="chatDateText">Wed, 14/10</span>
-            <button
-              type="button"
-              id="editChatDateBtn"
-              class="inline-edit-icon-btn hidden"
-              aria-label="Edit conversation date"
-              title="Edit date"
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <button type="button" id="editChatDateBtn" class="inline-edit-icon-btn hidden"
+              aria-label="Edit conversation date" title="Edit date">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
               </svg>
@@ -699,12 +685,8 @@ body {
           </div>
           <div id="chatDateEditor" class="inline-meta-editor hidden">
             <label for="editChatDateInput" class="sr-only">Conversation Date</label>
-            <input
-              type="text"
-              id="editChatDateInput"
-              class="inline-meta-input inline-meta-input--date"
-              placeholder="e.g. Wed, 14/10"
-            />
+            <input type="text" id="editChatDateInput" class="inline-meta-input inline-meta-input--date"
+              placeholder="e.g. Wed, 14/10" />
             <button type="button" id="saveChatDateBtn" class="btn-primary btn-xs">Save</button>
             <button type="button" id="cancelChatDateBtn" class="btn-secondary btn-xs">Cancel</button>
           </div>
@@ -713,36 +695,23 @@ body {
         <!-- Original Support Message Card (Editable) -->
         <article class="message-row message-row--incoming" id="originalMessageRow">
           <div class="message-card" id="originalMessageCard">
-            <button
-              type="button"
-              id="editMessageBtn"
-              class="edit-msg-btn hidden"
-              aria-label="Edit message"
-              title="Edit message"
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <button type="button" id="editMessageBtn" class="edit-msg-btn hidden" aria-label="Edit message"
+              title="Edit message">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
               </svg>
               <span>Edit</span>
             </button>
 
-            <!-- Rendered Message Content -->
+            <!-- Rendered Message Content (double-click to edit inline) -->
             <div id="originalMessageBody" class="message-body"></div>
 
-            <!-- Inline Edit Mode -->
-            <div id="originalMessageEditor" class="message-editor hidden">
-              <label for="editMessageTextarea" class="sr-only">Edit support message</label>
-              <textarea
-                id="editMessageTextarea"
-                class="edit-textarea"
-                rows="14"
-                spellcheck="true"
-              ></textarea>
-              <div class="edit-actions">
-                <button type="button" id="cancelEditBtn" class="btn-secondary">Cancel</button>
-                <button type="button" id="saveEditBtn" class="btn-primary">Save</button>
-              </div>
+            <!-- Inline Edit Actions (visible only while editing) -->
+            <div id="inlineEditActions" class="edit-actions hidden">
+              <button type="button" id="cancelEditBtn" class="btn-secondary">Cancel</button>
+              <button type="button" id="saveEditBtn" class="btn-primary">Save</button>
             </div>
           </div>
         </article>
@@ -764,62 +733,33 @@ body {
         <form id="composerForm" class="composer-row" autocomplete="off">
           <div class="composer-input-pill">
             <label for="messageInput" class="sr-only">Send Message</label>
-            <textarea
-              id="messageInput"
-              class="composer-textarea"
-              placeholder="Send Message"
-              rows="1"
-            ></textarea>
+            <textarea id="messageInput" class="composer-textarea" placeholder="Send Message" rows="1"></textarea>
 
-            <input
-              type="file"
-              id="fileInput"
-              class="sr-only"
-              accept="image/*,.pdf,.doc,.docx,.txt"
-              multiple
-            />
-            <input
-              type="file"
-              id="cameraInput"
-              class="sr-only"
-              accept="image/*"
-              capture="environment"
-            />
+            <input type="file" id="fileInput" class="sr-only" accept="image/*,.pdf,.doc,.docx,.txt" multiple />
+            <input type="file" id="cameraInput" class="sr-only" accept="image/*" capture="environment" />
 
-            <button
-              type="button"
-              id="attachBtn"
-              class="composer-icon-btn"
-              aria-label="Attach file"
-              title="Attach file"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+            <button type="button" id="attachBtn" class="composer-icon-btn" aria-label="Attach file" title="Attach file">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path
+                  d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                </path>
               </svg>
             </button>
 
-            <button
-              type="button"
-              id="cameraBtn"
-              class="composer-icon-btn"
-              aria-label="Take or upload photo"
-              title="Camera"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <button type="button" id="cameraBtn" class="composer-icon-btn" aria-label="Take or upload photo"
+              title="Camera">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                 <circle cx="12" cy="13" r="4"></circle>
               </svg>
             </button>
           </div>
 
-          <button
-            type="button"
-            id="micBtn"
-            class="composer-mic-btn"
-            aria-label="Voice message"
-            title="Voice message"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <button type="button" id="micBtn" class="composer-mic-btn" aria-label="Voice message" title="Voice message">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
               <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
               <line x1="12" y1="19" x2="12" y2="23"></line>
@@ -827,14 +767,10 @@ body {
             </svg>
           </button>
 
-          <button
-            type="submit"
-            id="sendBtn"
-            class="composer-send-btn hidden"
-            aria-label="Send message"
-            title="Send message"
-          >
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <button type="submit" id="sendBtn" class="composer-send-btn hidden" aria-label="Send message"
+            title="Send message">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
             </svg>
@@ -843,7 +779,8 @@ body {
       </div>
       <!-- Safety / Demonstration Notice -->
       <div class="demo-footer-note" role="note" aria-label="Demonstration notice">
-        Demonstration &amp; UI Recreation for incident documentation — not an authentic Paytm, Razorpay, or payment-provider page.
+        Demonstration &amp; UI Recreation for incident documentation — not an authentic Paytm, Razorpay, or
+        payment-provider page.
       </div>
     </footer>
   </div>
@@ -910,8 +847,7 @@ body {
   const chatStream = document.getElementById("chatStream");
   const originalMessageBody = document.getElementById("originalMessageBody");
   const editMessageBtn = document.getElementById("editMessageBtn");
-  const originalMessageEditor = document.getElementById("originalMessageEditor");
-  const editMessageTextarea = document.getElementById("editMessageTextarea");
+  const inlineEditActions = document.getElementById("inlineEditActions");
   const saveEditBtn = document.getElementById("saveEditBtn");
   const cancelEditBtn = document.getElementById("cancelEditBtn");
   const repliesContainer = document.getElementById("repliesContainer");
@@ -1127,26 +1063,47 @@ body {
     showToast("Date updated");
   }
 
-  // Edit Existing Message Flow
+  // Edit Existing Message Flow (Double-click inline contenteditable)
+  function extractMessageText(container) {
+    const parts = [];
+    Array.from(container.childNodes).forEach(function (node) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const raw = (node.innerText || node.textContent || "").trim();
+        if (!raw) return;
+        if (node.classList.contains("bullet-item")) {
+          parts.push("• " + raw.replace(/^•\s*/, ""));
+        } else {
+          parts.push(raw);
+        }
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        const rawText = (node.textContent || "").trim();
+        if (rawText) {
+          parts.push(rawText);
+        }
+      }
+    });
+    return parts.join("\n\n");
+  }
+
   function enterEditMode() {
-    editMessageTextarea.value = currentOriginalMessage;
-    originalMessageBody.classList.add("hidden");
-    editMessageBtn.classList.add("hidden");
-    originalMessageEditor.classList.remove("hidden");
-    editMessageTextarea.focus();
+    if (originalMessageBody.getAttribute("contenteditable") === "true") {
+      return;
+    }
+    originalMessageBody.setAttribute("contenteditable", "true");
+    inlineEditActions.classList.remove("hidden");
+    originalMessageBody.focus();
   }
 
   function exitEditMode() {
-    originalMessageEditor.classList.add("hidden");
-    originalMessageBody.classList.remove("hidden");
-    editMessageBtn.classList.remove("hidden");
+    originalMessageBody.removeAttribute("contenteditable");
+    inlineEditActions.classList.add("hidden");
   }
 
   function saveEditedMessage() {
-    const updated = editMessageTextarea.value.trim();
+    const updated = extractMessageText(originalMessageBody).trim();
     if (!updated) {
       showToast("Message cannot be empty");
-      editMessageTextarea.focus();
+      originalMessageBody.focus();
       return;
     }
     currentOriginalMessage = updated;
@@ -1157,7 +1114,7 @@ body {
   }
 
   function cancelEditedMessage() {
-    editMessageTextarea.value = currentOriginalMessage;
+    renderOriginalMessage(currentOriginalMessage);
     exitEditMode();
   }
 
@@ -1267,7 +1224,10 @@ body {
     }
   });
 
-  editTicketMetaBtn.addEventListener("click", enterTicketMetaEditMode);
+  if (editTicketMetaBtn) {
+    editTicketMetaBtn.addEventListener("click", enterTicketMetaEditMode);
+  }
+  ticketSubtitle.addEventListener("dblclick", enterTicketMetaEditMode);
   saveTicketMetaBtn.addEventListener("click", saveTicketMeta);
   cancelTicketMetaBtn.addEventListener("click", exitTicketMetaEditMode);
   editTicketIdInput.addEventListener("keydown", function (event) {
@@ -1287,7 +1247,10 @@ body {
     }
   });
 
-  editChatDateBtn.addEventListener("click", enterChatDateEditMode);
+  if (editChatDateBtn) {
+    editChatDateBtn.addEventListener("click", enterChatDateEditMode);
+  }
+  chatDateText.addEventListener("dblclick", enterChatDateEditMode);
   saveChatDateBtn.addEventListener("click", saveChatDate);
   cancelChatDateBtn.addEventListener("click", exitChatDateEditMode);
   editChatDateInput.addEventListener("keydown", function (event) {
@@ -1299,7 +1262,20 @@ body {
     }
   });
 
-  editMessageBtn.addEventListener("click", enterEditMode);
+  if (editMessageBtn) {
+    editMessageBtn.addEventListener("click", enterEditMode);
+  }
+  originalMessageBody.addEventListener("dblclick", enterEditMode);
+  originalMessageBody.addEventListener("keydown", function (event) {
+    if (originalMessageBody.getAttribute("contenteditable") !== "true") return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      cancelEditedMessage();
+    } else if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      saveEditedMessage();
+    }
+  });
   saveEditBtn.addEventListener("click", saveEditedMessage);
   cancelEditBtn.addEventListener("click", cancelEditedMessage);
 
@@ -1348,5 +1324,5 @@ body {
 
   </script>
 </body>
-</html>
 
+</html>

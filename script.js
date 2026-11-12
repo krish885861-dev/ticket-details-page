@@ -59,8 +59,7 @@
   const chatStream = document.getElementById("chatStream");
   const originalMessageBody = document.getElementById("originalMessageBody");
   const editMessageBtn = document.getElementById("editMessageBtn");
-  const originalMessageEditor = document.getElementById("originalMessageEditor");
-  const editMessageTextarea = document.getElementById("editMessageTextarea");
+  const inlineEditActions = document.getElementById("inlineEditActions");
   const saveEditBtn = document.getElementById("saveEditBtn");
   const cancelEditBtn = document.getElementById("cancelEditBtn");
   const repliesContainer = document.getElementById("repliesContainer");
@@ -276,26 +275,47 @@
     showToast("Date updated");
   }
 
-  // Edit Existing Message Flow
+  // Edit Existing Message Flow (Double-click inline contenteditable)
+  function extractMessageText(container) {
+    const parts = [];
+    Array.from(container.childNodes).forEach(function (node) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const raw = (node.innerText || node.textContent || "").trim();
+        if (!raw) return;
+        if (node.classList.contains("bullet-item")) {
+          parts.push("• " + raw.replace(/^•\s*/, ""));
+        } else {
+          parts.push(raw);
+        }
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        const rawText = (node.textContent || "").trim();
+        if (rawText) {
+          parts.push(rawText);
+        }
+      }
+    });
+    return parts.join("\n\n");
+  }
+
   function enterEditMode() {
-    editMessageTextarea.value = currentOriginalMessage;
-    originalMessageBody.classList.add("hidden");
-    editMessageBtn.classList.add("hidden");
-    originalMessageEditor.classList.remove("hidden");
-    editMessageTextarea.focus();
+    if (originalMessageBody.getAttribute("contenteditable") === "true") {
+      return;
+    }
+    originalMessageBody.setAttribute("contenteditable", "true");
+    inlineEditActions.classList.remove("hidden");
+    originalMessageBody.focus();
   }
 
   function exitEditMode() {
-    originalMessageEditor.classList.add("hidden");
-    originalMessageBody.classList.remove("hidden");
-    editMessageBtn.classList.remove("hidden");
+    originalMessageBody.removeAttribute("contenteditable");
+    inlineEditActions.classList.add("hidden");
   }
 
   function saveEditedMessage() {
-    const updated = editMessageTextarea.value.trim();
+    const updated = extractMessageText(originalMessageBody).trim();
     if (!updated) {
       showToast("Message cannot be empty");
-      editMessageTextarea.focus();
+      originalMessageBody.focus();
       return;
     }
     currentOriginalMessage = updated;
@@ -306,7 +326,7 @@
   }
 
   function cancelEditedMessage() {
-    editMessageTextarea.value = currentOriginalMessage;
+    renderOriginalMessage(currentOriginalMessage);
     exitEditMode();
   }
 
@@ -416,7 +436,10 @@
     }
   });
 
-  editTicketMetaBtn.addEventListener("click", enterTicketMetaEditMode);
+  if (editTicketMetaBtn) {
+    editTicketMetaBtn.addEventListener("click", enterTicketMetaEditMode);
+  }
+  ticketSubtitle.addEventListener("dblclick", enterTicketMetaEditMode);
   saveTicketMetaBtn.addEventListener("click", saveTicketMeta);
   cancelTicketMetaBtn.addEventListener("click", exitTicketMetaEditMode);
   editTicketIdInput.addEventListener("keydown", function (event) {
@@ -436,7 +459,10 @@
     }
   });
 
-  editChatDateBtn.addEventListener("click", enterChatDateEditMode);
+  if (editChatDateBtn) {
+    editChatDateBtn.addEventListener("click", enterChatDateEditMode);
+  }
+  chatDateText.addEventListener("dblclick", enterChatDateEditMode);
   saveChatDateBtn.addEventListener("click", saveChatDate);
   cancelChatDateBtn.addEventListener("click", exitChatDateEditMode);
   editChatDateInput.addEventListener("keydown", function (event) {
@@ -448,7 +474,20 @@
     }
   });
 
-  editMessageBtn.addEventListener("click", enterEditMode);
+  if (editMessageBtn) {
+    editMessageBtn.addEventListener("click", enterEditMode);
+  }
+  originalMessageBody.addEventListener("dblclick", enterEditMode);
+  originalMessageBody.addEventListener("keydown", function (event) {
+    if (originalMessageBody.getAttribute("contenteditable") !== "true") return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      cancelEditedMessage();
+    } else if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      saveEditedMessage();
+    }
+  });
   saveEditBtn.addEventListener("click", saveEditedMessage);
   cancelEditBtn.addEventListener("click", cancelEditedMessage);
 
